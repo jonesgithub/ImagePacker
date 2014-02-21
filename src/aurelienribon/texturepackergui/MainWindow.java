@@ -133,7 +133,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 			if (pack != null) {
 				loadPack(pack);
-				canvas.requestPackReload(pack.getOutput() + "/" + pack.getFilename());
+				canvas.requestPackReload(pack.getOutput() + "/" + pack.getScaleFilename());
 			} else {
 				inputField.setText("");
 				outputField.setText("");
@@ -262,7 +262,7 @@ public class MainWindow extends javax.swing.JFrame {
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
 
-		canvas.requestPackReload(pack.getOutput() + "/" + pack.getFilename());
+		canvas.requestPackReload(pack.getOutput() + "/" + pack.getScaleFilename());
 	}
 
 	private void packAll() {
@@ -274,7 +274,7 @@ public class MainWindow extends javax.swing.JFrame {
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
 
-		canvas.requestPackReload(pack.getOutput() + "/" + pack.getFilename());
+		canvas.requestPackReload(pack.getOutput() + "/" + pack.getScaleFilename());
 	}
 
 	private void copySettingsToAll() {
@@ -318,6 +318,7 @@ public class MainWindow extends javax.swing.JFrame {
 		opt_stripWhitespaceY_chk.setSelected(stgs.stripWhitespaceY);
 		opt_wrapX_cbox.setSelectedItem(stgs.wrapX);
 		opt_wrapY_cbox.setSelectedItem(stgs.wrapY);
+		opt_scale_nud.setValue(stgs.scale[0]);
 	}
 
 	private void savePack(Pack pack) {
@@ -351,6 +352,7 @@ public class MainWindow extends javax.swing.JFrame {
 		stgs.stripWhitespaceY = opt_stripWhitespaceY_chk.isSelected();
 		stgs.wrapX = TextureWrap.valueOf((String)opt_wrapX_cbox.getSelectedItem());
 		stgs.wrapY = TextureWrap.valueOf((String)opt_wrapY_cbox.getSelectedItem());
+        stgs.scale[0] = (Float)opt_scale_nud.getValue();
 	}
 
 	private void enable(Component cmp, boolean value) {
@@ -436,12 +438,14 @@ public class MainWindow extends javax.swing.JFrame {
         opt_paddingY_nud = new javax.swing.JSpinner();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
         opt_wrapX_cbox = new javax.swing.JComboBox();
         opt_wrapY_cbox = new javax.swing.JComboBox();
         opt_stripWhitespaceX_chk = new javax.swing.JCheckBox();
         versionLabel = new aurelienribon.utils.VersionLabel();
         centerPanel = new javax.swing.JPanel();
         renderPanel = new javax.swing.JPanel();
+        opt_scale_nud = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("GDX Texture Packer");
@@ -763,6 +767,11 @@ public class MainWindow extends javax.swing.JFrame {
         opt_stripWhitespaceX_chk.setText("Strip whitespace X");
         opt_stripWhitespaceX_chk.setOpaque(false);
 
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel21.setText("Scale");
+
+        opt_scale_nud.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(1.0f), Float.valueOf(0.05f), Float.valueOf(1.0f), Float.valueOf(0.05f)));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -845,12 +854,14 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addComponent(opt_paddingX_nud)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel21)
                                     .addComponent(jLabel20)
                                     .addComponent(jLabel19))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(opt_wrapX_cbox, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(opt_wrapY_cbox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(opt_wrapY_cbox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(opt_scale_nud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
 
@@ -860,9 +871,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {opt_alias_chk, opt_debug_chk, opt_ignoreBlankImages_chk, opt_pot_chk});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel16, jLabel17, jLabel18, jLabel19, jLabel2, jLabel20, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8, jLabel9});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel16, jLabel17, jLabel18, jLabel19, jLabel2, jLabel20, jLabel21, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8, jLabel9});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {opt_alphaThreashold_nud, opt_filterMag_cbox, opt_filterMin_cbox, opt_jpegQuality_nud, opt_paddingX_nud, opt_paddingY_nud, opt_wrapX_cbox, opt_wrapY_cbox});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {opt_alphaThreashold_nud, opt_filterMag_cbox, opt_filterMin_cbox, opt_jpegQuality_nud, opt_paddingX_nud, opt_paddingY_nud, opt_wrapX_cbox, opt_wrapY_cbox, opt_scale_nud});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -920,7 +931,11 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
-                            .addComponent(opt_wrapY_cbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(opt_wrapY_cbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21)
+                            .addComponent(opt_scale_nud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1034,6 +1049,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1076,6 +1092,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox opt_stripWhitespaceY_chk;
     private javax.swing.JComboBox opt_wrapX_cbox;
     private javax.swing.JComboBox opt_wrapY_cbox;
+    private javax.swing.JSpinner opt_scale_nud;
     private javax.swing.JTextField outputField;
     private javax.swing.JButton packAllBtn;
     private javax.swing.JButton packSelectedBtn;
