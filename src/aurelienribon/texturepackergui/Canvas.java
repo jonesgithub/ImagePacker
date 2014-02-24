@@ -268,6 +268,7 @@ public class Canvas extends ApplicationAdapter {
 	}
 
 	public void requestPackReload(String packPath) {
+		System.out.println("packPath = " + packPath);
 		packReloadRequested = true;
 		if (packPath != null) packFile = Gdx.files.absolute(packPath);
 		else packFile = null;

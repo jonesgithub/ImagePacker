@@ -31,10 +31,11 @@ public class Pack extends ChangeableObject {
 
 	public String getName() {return name.equals("") ? "unamed" : name;}
 	public String getRawFilename() {return filename;}
-    public String getFilename() {return filename.equals("") ? getName() + ".pack" : filename;}
-	public String getScaleFilename() {return filename.equals("") ? getName() + (settings.scale[0] == 1.0 ? "" : settings.scale[0]) + ".pack" : filename;}
+    public String getFilename() {return filename.equals("") ? getName() : filename + ".pack";}
+	public String getScaleFilename() {return (filename.equals("") ? getName() : filename ) + (settings.scale[0] == 1.0 ? "" : settings.scale[0]) + ".pack";}
 	public String getInput() {return input;}
-	public String getOutput() {return output;}
+	public String getOutput() {return output + "/" + getName() + (settings.scale[0] == 1.0 ? "" : settings.scale[0]);}
+	public String getSetOutput() {return output;}
 	public Settings getSettings() {return settings;}
 
 	public void load(String str, File baseDir) {

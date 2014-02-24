@@ -133,7 +133,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 			if (pack != null) {
 				loadPack(pack);
-				canvas.requestPackReload(pack.getOutput() + "/" + pack.getScaleFilename());
+				canvas.requestPackReload(pack.getOutput() + "/" + pack.getFilename());
 			} else {
 				inputField.setText("");
 				outputField.setText("");
@@ -262,7 +262,7 @@ public class MainWindow extends javax.swing.JFrame {
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
 
-		canvas.requestPackReload(pack.getOutput() + "/" + pack.getScaleFilename());
+		canvas.requestPackReload(pack.getOutput() + "/" + pack.getFilename());
 	}
 
 	private void packAll() {
@@ -274,7 +274,7 @@ public class MainWindow extends javax.swing.JFrame {
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
 
-		canvas.requestPackReload(pack.getOutput() + "/" + pack.getScaleFilename());
+		canvas.requestPackReload(pack.getOutput() + "/" + pack.getFilename());
 	}
 
 	private void copySettingsToAll() {
@@ -289,7 +289,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void loadPack(Pack pack) {
 		inputField.setText(pack.getInput());
-		outputField.setText(pack.getOutput());
+		outputField.setText(pack.getSetOutput()); //change by Xihu
 		filenameField.setText(pack.getRawFilename());
 
 		Settings stgs = pack.getSettings();
