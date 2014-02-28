@@ -267,13 +267,13 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private void packAll() {
 		Pack pack = (Pack) packsList.getSelectedValue();
+		pack.setScale((float)1.0);
 		savePack(pack);
 
 		PackDialog dialog = new PackDialog(this);
 		dialog.launchPack(packs);
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
-
 		canvas.requestPackReload(pack.getOutput() + "/" + pack.getFilename());
 	}
 

@@ -34,9 +34,29 @@ public class Pack extends ChangeableObject {
     public String getFilename() {return (filename.equals("") ? getName() : filename) + ".pack";}
 	public String getScaleFilename() {return (filename.equals("") ? getName() : filename ) + (settings.scale[0] == 1.0 ? "" : settings.scale[0]) + ".pack";}
 	public String getInput() {return input;}
-	public String getOutput() {return output + "/" + getName() + (settings.scale[0] == 1.0 ? "" : settings.scale[0]);}
+	public String getOutput()
+    {
+		if(settings.scale[0] == 1.0 )
+		{
+            return output + "/" + getName() +  "/HD";
+		}
+		else if(settings.scale[0] == 0.5)
+		{
+            return output + "/" + getName() +  "/SD";
+		}
+		else if(settings.scale[0] == 0.375)
+		{
+            return output + "/" + getName() +  "/android_ld";
+		}
+
+        return output + "/" + getName() + (settings.scale[0] == 1.0 ? "" : settings.scale[0]);
+    }
 	public String getSetOutput() {return output;}
 	public Settings getSettings() {return settings;}
+	public void setScale( float value)
+	{
+		settings.scale[0] = value;
+	}
 
 	public void load(String str, File baseDir) {
 		String lines[] = str.split("\n");

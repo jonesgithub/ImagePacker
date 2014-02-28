@@ -61,7 +61,18 @@ public class PackDialog extends javax.swing.JDialog {
 
 			if (isValid) {
 				try {
+					System.out.println("begin package scale : 1.0!");
+					pack.setScale((float)1.0);
 					TexturePacker.process(pack.getSettings(), pack.getInput(), pack.getOutput(), pack.getFilename());
+					
+					System.out.println("begin package scale : 0.5!");
+					pack.setScale((float)0.5);
+					TexturePacker.process(pack.getSettings(), pack.getInput(), pack.getOutput(), pack.getFilename());
+					
+					System.out.println("begin package scale : 0.375!");
+					pack.setScale((float)0.375);
+					TexturePacker.process(pack.getSettings(), pack.getInput(), pack.getOutput(), pack.getFilename());
+					
 					System.out.println("Done!");
 				} catch (RuntimeException ex) {
 					System.err.println("[error] Exception occured: " + ex.getMessage());
@@ -77,6 +88,7 @@ public class PackDialog extends javax.swing.JDialog {
 			System.setErr(new PrintStream(new FileOutputStream(FileDescriptor.err)));
 
 		}}).start();
+		
 	}
 
 	public void launchPack(final List<Pack> packs) {
@@ -110,7 +122,20 @@ public class PackDialog extends javax.swing.JDialog {
 
 				if (isValid) {
 					try {
+//						TexturePacker.process(pack.getSettings(), pack.getInput(), pack.getOutput(), pack.getFilename());
+						System.out.println("begin package scale : 1.0!");
+						pack.setScale((float)1.0);
 						TexturePacker.process(pack.getSettings(), pack.getInput(), pack.getOutput(), pack.getFilename());
+						
+						System.out.println("begin package scale : 0.5!");
+						pack.setScale((float)0.5);
+						TexturePacker.process(pack.getSettings(), pack.getInput(), pack.getOutput(), pack.getFilename());
+						
+						System.out.println("begin package scale : 0.375!");
+						pack.setScale((float)0.375);
+						TexturePacker.process(pack.getSettings(), pack.getInput(), pack.getOutput(), pack.getFilename());
+						
+						System.out.println("Done!");
 						System.out.println("Done!");
 					} catch (RuntimeException ex) {
 						System.err.println("[error] Exception occured: " + ex.getMessage());
