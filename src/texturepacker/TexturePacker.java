@@ -677,7 +677,7 @@ public class TexturePacker {
                 Element offsetKey = dictElement.addElement("key");
                 offsetKey.setText("spriteOffset");
                 Element offsetValue = dictElement.addElement("string");
-                String offset = String.format("{%d,%d}", rect.offsetX, rect.offsetY);
+                String offset = String.format("{%d,%d}", 0, 0);
                 offsetValue.setText(offset);
                 
 
